@@ -2,6 +2,9 @@ from django.test import TestCase
 
 from .models import Photo
 
+# import User model
+from django.contrib.auth.models import User
+
 
 class PhotoTests(TestCase):
     @classmethod
@@ -10,6 +13,7 @@ class PhotoTests(TestCase):
             title="Test Photo Title",
             description="Test Photo Description",
             image="photos/test_photo.jpg",
+            user=User.objects.create(username="Test Photo User"),
         )
         test_photo.save()
 
@@ -27,3 +31,8 @@ class PhotoTests(TestCase):
         photo = Photo.objects.get(id=1)
         expected_object_name = f"{photo.image}"
         self.assertEquals(expected_object_name, "photos/test_photo.jpg")
+
+    def test_user_content(self):
+        photo = Photo.objects.get(id=1)
+        expected_object_name = f"{photo.user}"
+        self.assertEquals(expected_object_name, "Test Photo User")
