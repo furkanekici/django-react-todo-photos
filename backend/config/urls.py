@@ -20,4 +20,9 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/photos/", include("photos.urls")),
     path("api/v1/todos/", include("todos.urls")),
+    path("api/v1/dj-rest-auth/", include("dj_rest_auth.urls")),
+    path(
+        "api/v1/dj-rest-auth/registration/",
+        include("dj_rest_auth.registration.urls"),
+    ),
 ]
