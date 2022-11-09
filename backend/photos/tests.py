@@ -2,8 +2,7 @@ from django.test import TestCase
 
 from .models import Photo
 
-# import User model
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 
 class PhotoTests(TestCase):
@@ -13,7 +12,7 @@ class PhotoTests(TestCase):
             title="Test Photo Title",
             description="Test Photo Description",
             image="photos/test_photo.jpg",
-            user=User.objects.create(username="Test Photo User"),
+            user=get_user_model().objects.create(username="Test Photo User"),
         )
         test_photo.save()
 

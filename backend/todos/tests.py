@@ -1,8 +1,6 @@
 from django.test import TestCase
 from .models import Todo
-
-# import User model
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 
 @classmethod
@@ -10,7 +8,7 @@ def setUpTestData(cls):
     test_todo = Todo.objects.create(
         title="Test Todo Title",
         description="Test Todo Description",
-        user=User.objects.create(username="Test Todo User"),
+        user=get_user_model().objects.create(username="Test Todo User"),
     )
     test_todo.save()
 
