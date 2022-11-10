@@ -8,12 +8,16 @@ from rest_framework import status
 
 class PhotoList(APIView):
     def get(self, request, format=None):
-        photos = Photo.objects.all()
+        # filter photos by user
+        photos = Photo.objects.filter(user=request.user.id)
         serializer = PhotoSerializer(photos, many=True)
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = PhotoSerializer(data=request.data)
+        # append user id to serializer
+        data = request.data
+        data["user"] = request.user.id
+        serializer = PhotoSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

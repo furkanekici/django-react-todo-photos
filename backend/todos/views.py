@@ -8,12 +8,15 @@ from rest_framework import status
 
 class TodoList(APIView):
     def get(self, request, format=None):
-        todos = Todo.objects.all()
+        # filter todos by user
+        todos = Todo.objects.filter(user=request.user.id)
         serializer = TodoSerializer(todos, many=True)
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = TodoSerializer(data=request.data)
+        data = request.data
+        data["user"] = request.user.id
+        serializer = TodoSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
