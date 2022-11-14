@@ -13,6 +13,7 @@ class PhotoList(APIView):
         serializer = PhotoSerializer(photos, many=True)
         return Response(serializer.data)
 
+    # create a new photo
     def post(self, request, format=None):
         # append user id to serializer
         data = request.data

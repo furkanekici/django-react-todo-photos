@@ -74,16 +74,17 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-"""CORS_ORIGIN_WHITELIST = (
-    "http://localhost:3000",
+CORS_ORIGIN_WHITELIST = (
+    "https://example.vercel.app",
     "http://localhost:8000",
-)"""
+    "http://localhost:3000",
+)
 
-CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOW_METHODS = [
+"""CORS_ALLOW_METHODS = [
     "DELETE",
     "GET",
     "OPTIONS",
@@ -101,7 +102,7 @@ CORS_ALLOW_HEADERS = [
     "user-agent",
     "x-csrftoken",
     "x-requested-with",
-]
+]"""
 
 ROOT_URLCONF = "config.urls"
 

@@ -7,12 +7,14 @@ from rest_framework import status
 
 
 class TodoList(APIView):
+    # return logged in user's todos
     def get(self, request, format=None):
         # filter todos by user
         todos = Todo.objects.filter(user=request.user.id)
         serializer = TodoSerializer(todos, many=True)
         return Response(serializer.data)
 
+    # create a new todo
     def post(self, request, format=None):
         data = request.data
         data["user"] = request.user.id
@@ -30,11 +32,13 @@ class TodoDetail(APIView):
         except Todo.DoesNotExist:
             raise Http404
 
+    # returns a single todo
     def get(self, request, pk, format=None):
         todo = self.get_object(pk)
         serializer = TodoSerializer(todo)
         return Response(serializer.data)
 
+    # updates a todo
     def put(self, request, pk, format=None):
         todo = self.get_object(pk)
         serializer = TodoSerializer(todo, data=request.data)
@@ -43,6 +47,7 @@ class TodoDetail(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    # deletes a todo
     def delete(self, request, pk, format=None):
         todo = self.get_object(pk)
         todo.delete()
