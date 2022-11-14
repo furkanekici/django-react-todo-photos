@@ -3,6 +3,10 @@ module.exports = {
     content: ["./src/**/*.{js, ts, jsx, tsx}"],
     theme: {
         extend: {
+            backgroundImage: {
+                'light-pattern': "url('/assets/patternpad1.svg')",
+                'dark-pattern': "url('/assets/patternpad2.svg')",
+            }
         }
     },
     plugins: [require('daisyui')],
