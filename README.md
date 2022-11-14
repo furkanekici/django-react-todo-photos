@@ -1,1 +1,1 @@
-# django-todo-photos
+# django-react-todo-photos
