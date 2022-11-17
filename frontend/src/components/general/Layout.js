@@ -3,7 +3,8 @@ import { Outlet, useNavigate } from 'react-router-dom'
 /* Icons */
 import { IconContext } from 'react-icons';
 import { BsUiChecksGrid } from "react-icons/bs";
-import { RiGalleryFill, RiLoginCircleFill, RiLogoutCircleFill } from "react-icons/ri";
+import { RiLoginCircleFill, RiLogoutCircleFill } from "react-icons/ri";
+import { HiPhoto } from "react-icons/hi2";
 
 function Layout() {
     const [darkMode, setDarkMode] = useState(false);
@@ -44,9 +45,16 @@ function Layout() {
                                     }}><BsUiChecksGrid /></a></li>
                                 </div>
                             </IconContext.Provider>
+                            <IconContext.Provider value={{ color: darkMode ? "#FFFFFF" : "#272935", className: "h-6 w-6" }}>
+                                <div className='tooltip tooltip-bottom' data-tip="Photo">
+                                    <li><a onClick={() => {
+                                        navigate('/photo');
+                                    }}><HiPhoto /></a></li>
+                                </div>
+                            </IconContext.Provider>
                         </ul>
                     </div>
-                    <div className='p-1'>
+                    <div className='lg:px-5 tooltip tooltip-bottom' data-tip={darkMode ? "Light Mode" : "Dark Mode"}>
                         <label className='swap swap-rotate'>
                             <input type="checkbox" defaultChecked={darkMode} onChange={(e) => {
                                 setDarkMode(e.target.checked);
@@ -56,7 +64,9 @@ function Layout() {
                         </label>
                     </div>
                 </div>
-                <Outlet context={[darkMode, setDarkMode]} />
+                <div className='lg:m-6'>
+                    <Outlet context={[darkMode, setDarkMode]} />
+                </div>
                 <footer className='footer footer-center p-4 text-base-content'>
                     <div>
                         <p className='text-xs md:text-sm lg:text-base'>
@@ -85,6 +95,12 @@ function Layout() {
                             navigate('/todo');
                             setDrawerOpen(false);
                         }}><BsUiChecksGrid /> Todo</a></li>
+                    </IconContext.Provider>
+                    <IconContext.Provider value={{ color: darkMode ? "#FFFFFF" : "#272935", className: "h-6 w-6" }}>
+                        <li><a onClick={() => {
+                            navigate('/photo');
+                            setDrawerOpen(false);
+                        }}><HiPhoto /> Photo</a></li>
                     </IconContext.Provider>
                 </ul>
             </div>

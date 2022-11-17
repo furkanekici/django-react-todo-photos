@@ -22,7 +22,11 @@ function Main() {
     const onSubmit = async (e) => {
         e.preventDefault();
         const response = await login(username, password);
-        if (response.status === 200) {
+        console.log(response);
+        if (response === undefined || response.status === 500) {
+            setAlertMessage("Something went wrong");
+            setWhichAlert("error");
+        } else if (response.status === 200) {
             setAlertMessage("Login successful");
             setWhichAlert("success");
             setTimeout(() => {
@@ -30,9 +34,6 @@ function Main() {
             }, 1000);
         } else if (response.status === 400) {
             setAlertMessage("Invalid username or password");
-            setWhichAlert("error");
-        } else {
-            setAlertMessage("Something went wrong");
             setWhichAlert("error");
         }
     }
