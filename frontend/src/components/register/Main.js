@@ -1,36 +1,37 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
-import useLogin from "../hooks/useLogin";
+import useRegister from "../hooks/useRegister";
 import alerts from '../general/Alert';
 
 function Main() {
-    const formData = useRef();
     const [darkMode, setDarkMode] = useOutletContext();
     const [whichAlert, setWhichAlert] = useState("none");
     const [alertMessage, setAlertMessage] = useState("");
 
+    const formData = useRef();
     const navigate = useNavigate();
     const location = useLocation();
-    const login = useLogin();
+    const register = useRegister();
     const { infoAlert, successAlert, warningAlert, errorAlert } = alerts();
 
-    const from = location.state?.from.pathname || "/";
+    const from = location.state?.from.pathname || "/login";
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const { username, password } = formData.current;
-        const response = await login(username.value, password.value);
+        const { username, password1, password2 } = formData.current;
+        const response = await register(username.value, password1.value, password2.value);
         if (response === undefined || response.status === 500) {
             setAlertMessage("Something went wrong");
             setWhichAlert("error");
-        } else if (response.status === 200) {
-            setAlertMessage("Login successful");
+        } else if (response.status === 201) {
+            setAlertMessage("Registration successful");
             setWhichAlert("success");
             setTimeout(() => {
                 navigate(from, { replace: true });
             }, 1000);
         } else if (response.status === 400) {
-            setAlertMessage(response.data.non_field_errors);
+            console.log(response.data);
+            setAlertMessage("Invalid credentials");
             setWhichAlert("error");
         }
     }
@@ -39,7 +40,7 @@ function Main() {
         setTimeout(() => {
             setWhichAlert("none");
         }, 3000)
-    }, [whichAlert])
+    }, [whichAlert]);
 
     return (
         <div className='relative'>
@@ -52,7 +53,7 @@ function Main() {
                     <div className={!darkMode ? 'relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20' : 'relative px-4 py-10 bg-[#272935] shadow-lg sm:rounded-3xl sm:p-20'}>
                         <div className='max-w-md mx-auto'>
                             <div>
-                                <h1 className='text-2xl font-semibold'>Login</h1>
+                                <h1 className='text-2xl font-semibold'>Register</h1>
                             </div>
                             <form ref={formData} className='mt-2' onSubmit={onSubmit}>
                                 <div>
@@ -66,22 +67,32 @@ function Main() {
                                     />
                                 </div>
                                 <div>
-                                    <label className='text-gray-700 text-sm font-bold mb-2' htmlFor="password">Password</label>
+                                    <label className='text-gray-700 text-sm font-bold mb-2' htmlFor="password1">Password</label>
                                     <input
-                                        id='password'
-                                        name='password'
+                                        id='password1'
+                                        name='password1'
                                         type="password"
                                         placeholder="********"
                                         className={'input input-bordered input-primary w-full mb-2'}
                                     />
                                 </div>
-                                <button type="submit" className='btn w-full mt-3'>Login</button>
+                                <div>
+                                    <label className='text-gray-700 text-sm font-bold mb-2' htmlFor="password2">Confirm Password</label>
+                                    <input
+                                        id='password2'
+                                        name='password2'
+                                        type="password"
+                                        placeholder="********"
+                                        className={'input input-bordered input-primary w-full mb-2'}
+                                    />
+                                </div>
+                                <button type="submit" className='btn w-full mt-3'>Create an account</button>
                             </form>
                             <div className='divider'>OR</div>
                             <div>
                                 <button className='btn btn-secondary w-full mx-auto' onClick={() => {
-                                    navigate("/register");
-                                }}>Create an account</button>
+                                    navigate("/login");
+                                }}>Login</button>
                             </div>
                         </div>
                     </div>

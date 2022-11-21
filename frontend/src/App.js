@@ -2,10 +2,12 @@ import { Route, Routes } from 'react-router-dom'
 import Layout from './components/general/Layout'
 import RequireAuth from './components/general/RequireAuth'
 import Login from './components/login/Main'
+import Register from './components/register/Main'
 import Todo from './components/todo/Main'
 import Photo from './components/photo/Main'
 
 import './App.css'
+import Missing from './components/general/Missing'
 
 function App() {
     return (
@@ -13,6 +15,7 @@ function App() {
             <Route path='/' element={<Layout />}>
                 {/* Public routes */}
                 <Route path='login' element={<Login />} />
+                <Route path='register' element={<Register />} />
                 {/* Private routes */}
                 <Route element={<RequireAuth />}>
                     <Route path='/' element={<div>Home</div>} />
@@ -20,11 +23,8 @@ function App() {
                     <Route path='photo' element={<Photo />} />
                 </Route>
                 {/* Missing routes */}
-                <Route index element={
-                    <div>
-                        <h1>404</h1>
-                        <p>Page not found</p>
-                    </div>
+                <Route path='*' element={
+                    <Missing />
                 } />
             </Route>
         </Routes>
