@@ -21,7 +21,7 @@ function Main() {
                     <div className="flex flex-col items-center justify-center w-full h-full mt-4">
                         <div className="flex flex-col items-center justify-center w-full h-full max-w-lg p-6 bg-gray-100 border-2 border-gray-300 rounded-lg">
                             <div className="flex flex-col items-center justify-center w-full h-full">
-                                <input type="file" name="file" id="file" className="w-full h-full" />
+                                <input type="file" name="file" id="file" className="file-input w-full h-full" />
                             </div>
                         </div>
                     </div>
