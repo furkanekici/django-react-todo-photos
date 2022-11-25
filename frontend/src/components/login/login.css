@@ -1,0 +1,9 @@
+#login-background-dark {
+    background: linear-gradient(135deg, #09090b 25%, transparent 25%) -28px 0/ 56px 56px, linear-gradient(225deg, rgba(9, 9, 11, 0.5) 25%, transparent 25%) -28px 0/ 56px 56px, linear-gradient(315deg, #09090b 25%, transparent 25%) 0 0/ 56px 56px, linear-gradient(45deg, rgba(9, 9, 11, 0.5) 25%, #dca54c 25%) 0 0/ 56px 56px;
+    background-color: #dca54c;
+}
+
+#login-background-light {
+    background: linear-gradient(135deg, #ffffff 25%, transparent 25%) -28px 0/ 56px 56px, linear-gradient(225deg, rgba(255, 255, 255, 0.5) 25%, transparent 25%) -28px 0/ 56px 56px, linear-gradient(315deg, #ffffff 25%, transparent 25%) 0 0/ 56px 56px, linear-gradient(45deg, rgba(255, 255, 255, 0.5) 25%, #d1c1d7 25%) 0 0/ 56px 56px;
+    background-color: #d1c1d7;
+}

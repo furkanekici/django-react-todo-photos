@@ -6,6 +6,9 @@ module.exports = {
             backgroundImage: {
                 'light-pattern': "url('/assets/patternpad1.svg')",
                 'dark-pattern': "url('/assets/patternpad2.svg')",
+            },
+            colors: {
+                'pastel-blue': '#70acc7',
             }
         }
     },

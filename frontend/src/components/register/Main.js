@@ -49,7 +49,7 @@ function Main() {
             </div>
             <div className={darkMode ? "min-h-screen py-6 bg-dark-pattern flex flex-col justify-center sm:py-12" : "min-h-screen py-6 bg-light-pattern flex flex-col justify-center sm:py-12"}>
                 <div className='relative py-2 sm:max-w-xl sm:mx-auto'>
-                    <div className={!darkMode ? 'absolute inset-0 bg-gradient-to-r from-emerald-600 to-zinc-700 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl' : 'absolute inset-0 bg-gradient-to-r from-amber-700 to-white shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl'} ></div>
+                    <div className={!darkMode ? 'absolute inset-0 bg-gradient-to-r from-cyan-500 to-zinc-700 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl' : 'absolute inset-0 bg-gradient-to-r from-yellow-600 to-white shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl'} ></div>
                     <div className={!darkMode ? 'relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20' : 'relative px-4 py-10 bg-[#272935] shadow-lg sm:rounded-3xl sm:p-20'}>
                         <div className='max-w-md mx-auto'>
                             <div>
