@@ -54,7 +54,14 @@ function Main() {
         event.preventDefault();
 
         updateTodo(id.current, title.current, description.current).then((response) => {
-            console.log(response);
+            if (response.status === 200) {
+                setWhichAlert("success");
+                setAlertMessage("Todo updated successfully!");
+                setTodos(todos.map((todo) => (todo.id === id.current ? response.data : todo)));
+            } else {
+                setWhichAlert("error");
+                setAlertMessage("Something went wrong");
+            }
         });
     };
 
@@ -91,19 +98,30 @@ function Main() {
                         {
                             todos.map((todo) => {
                                 return (
-                                    <div key={todo.id} className="flex mb-4 items-center">
-                                        <p className="w-full font-bold">{todo.title}</p>
-                                        <p className="w-full italic">{todo.description}</p>
-                                        <button className="btn btn-warning flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-green border-green hover:bg-green" onClick={(e) => {
-                                            id.current = todo.id;
-                                            title.current = todo.title;
-                                            description.current = todo.description;
-                                            onUpdate(e);
-                                        }}>Edit</button>
-                                        <button className="btn btn-error flex-no-shrink p-2 ml-2 border-2 rounded text-red border-red hover:text-white hover:bg-red" onClick={(e) => {
-                                            id.current = todo.id;
-                                            onDelete(e);
-                                        }}>Delete</button>
+                                    <div key={todo.id} tabIndex={0} className="collapse collapse-arrow mb-4 border border-base-300 bg-base-100 rounded-box">
+                                        <input type="checkbox" />
+                                        <div className="collapse-title flex items-center">
+                                            <p className="w-full font-bold">{todo.title}</p>
+                                            <p className="w-full italic">{todo.description}</p>
+                                        </div>
+                                        <div className="collapse-content">
+                                            <div className="flex flex-col">
+                                                <input ref={title} className="input input-bordered shadow appearance-none border rounded w-full py-2 px-3 mr-4 mb-2 text-grey-darker" placeholder="Title" defaultValue={todo.title} />
+                                                <input ref={description} className="input input-bordered shadow appearance-none border rounded w-full py-2 px-3 mr-4 mb-2 text-grey-darker" placeholder="Description" defaultValue={todo.description} />
+                                                <button className="btn btn-warning flex-no-shrink p-2 border-2 rounded hover:text-white text-green border-green hover:bg-green" onClick={(e) => {
+                                                    e.preventDefault();
+                                                    id.current = todo.id;
+                                                    title.current = todo.title;
+                                                    description.current = todo.description;
+                                                    onUpdate(e);
+                                                }}>Update</button>
+                                                <button className="btn btn-error flex-no-shrink p-2  border-2 rounded text-red border-red hover:text-white hover:bg-red" onClick={(e) => {
+                                                    id.current = todo.id;
+                                                    onDelete(e);
+                                                }}>Delete</button>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 );
                             }
@@ -112,7 +130,7 @@ function Main() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 
